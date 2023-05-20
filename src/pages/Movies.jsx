@@ -9,7 +9,6 @@ const MoviesSearch = () => {
 
   const handleInputChange = e => {
     setSearchQuery(e.target.value.toLowerCase());
-    console.log(e.target.value); // Log the updated value, not searchQuery
   };
 
   const handleSubmit = async e => {
