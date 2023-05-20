@@ -4,7 +4,6 @@ import FetchMovieDetails from 'services/MovieDetail-api';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
-  console.log(movieId);
 
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
