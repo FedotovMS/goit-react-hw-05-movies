@@ -13,11 +13,11 @@ const Layout = () => {
   return (
     <div>
       <header>
-        <ul className="mainNav">
-          <li className="mainNav-item">
+        <ul>
+          <li>
             <StyledLink to="/">Home</StyledLink>
           </li>
-          <li className="mainNav-item">
+          <li>
             <StyledLink to="/movies">Movies</StyledLink>
           </li>
         </ul>

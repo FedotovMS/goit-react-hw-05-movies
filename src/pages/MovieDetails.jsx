@@ -1,10 +1,11 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useState, useRef } from 'react';
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import FetchMovieDetails from 'services/MovieDetail-api';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
+  const backLinkHref = useRef(location.state?.from || '/');
 
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +27,7 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <Link to={location.state?.from ?? '/'}>Back</Link>
+      <Link to={backLinkHref.current}>Back</Link>
       {isLoading ? (
         <p>Loading...</p>
       ) : (

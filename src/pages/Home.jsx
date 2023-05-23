@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import FetchMoviesList from 'services/MoviesList-api';
+import { StyledMovieLink, Title } from './Home.styled';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -31,19 +32,19 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Trending movies</h1>
+      <Title>Trending movies</Title>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
         <ul>
           {movies.map(movie => (
-            <Link
+            <StyledMovieLink
               key={movie.id}
               to={`/movies/${movie.id}`}
               state={{ from: location }}
             >
               <li>{movie.title}</li>
-            </Link>
+            </StyledMovieLink>
           ))}
         </ul>
       )}

@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
 import Layout from './Layout';
+import Error404 from 'pages/Error404';
 
 const Home = lazy(() => import('../pages/Home'));
 const MoviesSearch = lazy(() => import('../pages/Movies'));
@@ -18,6 +19,7 @@ export const App = () => {
           <Route path="credits" element={<Credits />} />
           <Route path="reviews" element={<Reviews />} />
         </Route>
+        <Route path="*" element={<Error404 />} />
       </Route>
     </Routes>
   );

@@ -1,8 +1,13 @@
-// import styled from 'styled-components';
-// import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-// export const StyledLink = styled(Link)`
-//   text-decoration: none;
-//   font-weight: 600;
-//   color: black;
-// `;
+export const StyledMovieLink = styled(Link)`
+  text-decoration: none;
+  font-weight: 400;
+  color: black;
+`;
+
+export const Title = styled.h1`
+  font-weight: 600;
+  text-align: center;
+`;
