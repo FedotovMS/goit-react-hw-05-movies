@@ -1,33 +1,27 @@
 import { Suspense } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import styled from 'styled-components';
+import { Outlet } from 'react-router-dom';
 
-const StyledLink = styled(NavLink)`
-  color: black;
+import { StyledLink, StyledHeader } from './Layout.styled';
 
-  &.active {
-    color: orange;
-  }
-`;
 const Layout = () => {
   return (
     <div>
       <header>
-        <ul>
+        <StyledHeader>
           <li>
             <StyledLink to="/">Home</StyledLink>
           </li>
           <li>
             <StyledLink to="/movies">Movies</StyledLink>
           </li>
-        </ul>
+        </StyledHeader>
       </header>
       <main>
         <Suspense>
           <Outlet />
         </Suspense>
       </main>
-      <footer>Footer</footer>
+      {/* <footer>Footer</footer> */}
     </div>
   );
 };
