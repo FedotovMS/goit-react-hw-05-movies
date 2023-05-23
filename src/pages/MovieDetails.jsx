@@ -5,7 +5,7 @@ import FetchMovieDetails from 'services/MovieDetail-api';
 const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
-  const backLinkHref = useRef(location.state?.from || '/');
+  const backLink = useRef(location.state?.from || '/');
 
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +27,7 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <Link to={backLinkHref.current}>Back</Link>
+      <Link to={backLink.current}>Back</Link>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
