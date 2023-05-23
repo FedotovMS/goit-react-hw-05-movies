@@ -8,7 +8,7 @@ const FetchMoviesList = async () => {
     `https://api.themoviedb.org/3/trending/all/${period}?language=en-US`,
     options
   );
-  // console.log(response);
+
   const movies = response.data.results.map(({ id, name, title }) => {
     return {
       id,
@@ -18,4 +18,5 @@ const FetchMoviesList = async () => {
   });
   return { movies };
 };
+
 export default FetchMoviesList;

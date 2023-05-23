@@ -17,7 +17,7 @@ const FetchMovieDetails = async movieId => {
     poster_path,
     overview,
   };
-  console.log(movieData);
+
   return movieData;
 };
 

@@ -1,44 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FetchSearch from 'services/Search-api';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 const MoviesSearch = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [movies, setMovies] = useState([]);
+  const query = searchParams.get('query') ?? '';
+  const location = useLocation();
 
-  const handleInputChange = e => {
-    setSearchQuery(e.target.value.toLowerCase());
+  const updateQuery = query => {
+    const nextParams = query !== '' ? { query } : {};
+    setSearchParams(nextParams);
   };
 
-  const handleSubmit = async e => {
+  const handleFormSubmit = e => {
     e.preventDefault();
-    if (searchQuery.trim() === '') {
-      alert('Please enter your search query');
-      return;
-    }
-
-    try {
-      setIsLoading(true);
-      const { movies } = await FetchSearch(searchQuery);
-      const formattedMovies = movies.map(movie => {
-        const title = movie.title || movie.name;
-        return {
-          id: movie.id,
-          title,
-        };
-      });
-      setSearchResults(formattedMovies);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
+    FetchSearch(query).then(response => {
+      setMovies([...response.results]);
+    });
   };
+
+  useEffect(() => {
+    FetchSearch(query).then(response => {
+      setMovies([...response.results]);
+    });
+  }, [query]);
 
   return (
     <div>
-      <form className="searchForm" onSubmit={handleSubmit}>
+      <form className="searchForm" onSubmit={handleFormSubmit}>
         <button type="submit" className="searchFormButton">
           <span className="searchFormButtonLabel">Search</span>
         </button>
@@ -49,22 +39,18 @@ const MoviesSearch = () => {
           autoComplete="off"
           autoFocus
           placeholder="Search movies"
-          value={searchQuery}
-          onChange={handleInputChange}
+          value={query}
+          onChange={e => updateQuery(e.target.value.toLowerCase())}
         />
       </form>
 
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <ul>
-          {searchResults.map(movie => (
-            <Link key={movie.id} to={`${movie.id}`}>
-              <li>{movie.title}</li>
-            </Link>
-          ))}
-        </ul>
-      )}
+      <ul>
+        {movies.map(movie => (
+          <Link key={movie.id} to={`${movie.id}`} state={{ from: location }}>
+            <li>{movie.title}</li>
+          </Link>
+        ))}
+      </ul>
     </div>
   );
 };

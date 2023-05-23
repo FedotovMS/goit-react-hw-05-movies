@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link, Outlet } from 'react-router-dom';
+import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import FetchMovieDetails from 'services/MovieDetail-api';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
+  const location = useLocation();
 
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,23 +26,33 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <h2>Movie Details</h2>
+      <Link to={location.state?.from ?? '/'}>Back</Link>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
         <>
           {movie && (
             <>
+              <h2>{movie.title}</h2>
               <img
                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                 alt={movie.title}
               />
 
-              <h3>{movie.title}</h3>
+              <h3>Popularity:</h3>
+              <p>{movie.popularity}</p>
+              <h3>Genres:</h3>
+              <p>
+                {movie.genres.map(genre => (
+                  <li key={genre.id}>{genre.name}</li>
+                ))}
+              </p>
+              <h3>Overview:</h3>
               <p>{movie.overview}</p>
+              <h4>More information:</h4>
               <ul>
                 <li>
-                  <Link to="cast">Cast</Link>
+                  <Link to="credits">Credit</Link>
                 </li>
                 <li>
                   <Link to="reviews">Reviews</Link>
