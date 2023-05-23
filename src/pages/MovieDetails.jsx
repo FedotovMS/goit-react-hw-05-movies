@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import FetchMovieDetails from 'services/MovieDetail-api';
 
@@ -58,7 +58,9 @@ const MovieDetails = () => {
                   <Link to="reviews">Reviews</Link>
                 </li>
               </ul>
-              <Outlet />
+              <Suspense>
+                <Outlet />
+              </Suspense>
             </>
           )}
         </>
