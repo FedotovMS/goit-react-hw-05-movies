@@ -2,7 +2,7 @@ import FetchMovieCast from 'services/MovieCast-api';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-const Credits = ({ onClick }) => {
+const Cast = ({ onClick }) => {
   const { movieId } = useParams();
   const [credits, setCredits] = useState([]);
 
@@ -44,4 +44,4 @@ const Credits = ({ onClick }) => {
   );
 };
 
-export default Credits;
+export default Cast;

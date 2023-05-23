@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import FetchMoviesList from 'services/MoviesList-api';
-import { StyledMovieLink, Title } from './Home.styled';
+import {
+  StyledMovieLink,
+  Title,
+  StyledMoviesList,
+  StyledLi,
+} from './Home.styled';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -18,6 +23,7 @@ const Home = () => {
           return {
             id: movie.id,
             title,
+            poster_path: movie.poster_path,
           };
         });
         setMovies(formattedMovies);
@@ -36,17 +42,24 @@ const Home = () => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <StyledMoviesList>
           {movies.map(movie => (
             <StyledMovieLink
               key={movie.id}
               to={`/movies/${movie.id}`}
               state={{ from: location }}
             >
-              <li>{movie.title}</li>
+              <StyledLi>
+                <img
+                  src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`}
+                  alt={movie.title}
+                  width="185"
+                />
+                <b>{movie.title}</b>
+              </StyledLi>
             </StyledMovieLink>
           ))}
-        </ul>
+        </StyledMoviesList>
       )}
     </div>
   );

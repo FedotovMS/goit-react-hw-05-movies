@@ -9,13 +9,17 @@ const FetchMoviesList = async () => {
     options
   );
 
-  const movies = response.data.results.map(({ id, name, title }) => {
-    return {
-      id,
-      name,
-      title,
-    };
-  });
+  const movies = response.data.results.map(
+    ({ id, name, title, poster_path }) => {
+      return {
+        id,
+        name,
+        title,
+        poster_path,
+      };
+    }
+  );
+  // console.log({ movies });
   return { movies };
 };
 

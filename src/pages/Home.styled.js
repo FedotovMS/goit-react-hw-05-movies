@@ -11,3 +11,15 @@ export const Title = styled.h1`
   font-weight: 600;
   text-align: center;
 `;
+export const StyledMoviesList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+`;
+
+export const StyledLi = styled.li`
+  display: flex;
+  flex-flow: column;
+  width: 185px;
+`;

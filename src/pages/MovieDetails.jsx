@@ -53,7 +53,7 @@ const MovieDetails = () => {
               <h4>More information:</h4>
               <ul>
                 <li>
-                  <Link to="credits">Credit</Link>
+                  <Link to="credits">Cast</Link>
                 </li>
                 <li>
                   <Link to="reviews">Reviews</Link>
